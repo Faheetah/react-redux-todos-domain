@@ -10,27 +10,35 @@ import {
 import * as AppActions from '../actions'
 
 import Error from '../components/Error'
+import Loading from '../components/Loading'
 
 import Todo from '../../todo/containers/Todo'
 
 class App extends Component {
   componentDidMount() {
-    this.props.setError('e')
+    this.props.setError('Some error happened')
+    this.props.setLoading(true)
+    setTimeout(() => (this.props.setLoading(false)), 1000)
   }
 
   render() {
-    console.log('r', this.props.error)
+    if (this.props.loading === true) {
+      return <Loading />
+    }
+
     return (
       <Router>
         <div className="App">
+          <h3>
+            <Link to="/">[Home]</Link>
+            <Link to="/Todo">[Todo]</Link>
+          </h3>
+
           <div className="App-header">
             <h2>Welcome to React</h2>
 
-            <Link to="/">Home</Link>
-            <Link to="/Todo">Todo</Link>
-          </div>
-          <div className="Error">
             <Error error={this.props.error} />
+
           </div>
 
           <Route exact path="/" component={Todo}/>

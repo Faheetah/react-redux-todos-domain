@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Error = ({error}) => (
-    <div>error: {error}</div>
+    <h3>error: {error}</h3>
 )
 
 export default Error
